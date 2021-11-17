@@ -1,0 +1,9 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<h3>编辑</h3>
+<form method="post">
+    待办 <input type="text" name="body" autocomplete="off" required value="{{ todo.body }}">
+    <input type="submit" class="btn" name="submit" value="更新">
+</form>
+{% endblock %}

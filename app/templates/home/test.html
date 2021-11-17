@@ -1,0 +1,53 @@
+{% extends 'home/base.html' %} {% block content %}
+<div>
+
+    <!-- Nav tabs -->
+    <div class="row" id="dashboard" style="display: block;">
+        <ul role="tablist">
+            <li>
+                <a href="#home" role="tab" data-toggle="tab">
+                    全部 <span>{{ todos|length }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="#profile" role="tab" data-toggle="tab">
+                    未完成 <span>{{ todo_false|length }}</span>
+                </a>
+            </li>
+            <li>
+                <a href="#messages" role="tab" data-toggle="tab">
+                    已完成 <span>{{ todo_true|length }}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">
+            <ul class="todo-list">
+                {% for todo in todos %}
+                <li>
+                    <!--选框-->
+                    {% if todo.done == true %}
+                    <div class="true">{% else %}
+                        <div class="false">{% endif %}
+                            <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()">
+                                <input type="hidden" name="todo_1" value="0">
+                            </form>
+                        </div>
+                        <p>{{ todo.body }}</p>
+                        <span class="float-right">
+            <a href="{{ url_for('home.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+            <form action="{{ url_for('home.delete', todo_id=todo.id) }}" method="post" class="inline-form">
+            <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
+            </form>
+
+        </span>
+                </li>
+                {% endfor %}
+            </ul>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="profile">2..</div>
+            <div role="tabpanel" class="tab-pane" id="messages">3..</div>
+        </div>
+        {% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'home/base.html' %} {% block content %}
+<ul class="todo-list">
+    <li>
+        Page Not Found - 404
+        <span class="float-right">
+            <a href="{{ url_for('home.index') }}">返回首页</a>
+        </span>
+    </li>
+</ul>
+{% endblock %}

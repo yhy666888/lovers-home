@@ -1,0 +1,48 @@
+{% extends 'home/base.html' %} {% block content %}
+<div id="he-plugin-simple"></div>
+<script>
+    WIDGET = {
+        "CONFIG": {
+            "modules": "01234",
+            "background": "1",
+            "tmpColor": "FFFFFF",
+            "tmpSize": "16",
+            "cityColor": "FFFFFF",
+            "citySize": "16",
+            "aqiColor": "FFFFFF",
+            "aqiSize": "16",
+            "weatherIconSize": "24",
+            "alertIconSize": "18",
+            "padding": "10px 10px 10px 10px",
+            "shadow": "0",
+            "language": "auto",
+            "borderRadius": "0",
+            "fixed": "false",
+            "vertical": "top",
+            "horizontal": "center",
+            "key": "afc4004cfbf84ec488b1fe9b2d5ae32d"
+        }
+    }
+</script>
+<script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+            <div class="inner cover">
+                <div class="interval">
+                    <h1 class="cover-heading">{{ interval }}</h1>
+                    <p class="lead">天前，我们成为了情侣。</p>
+                </div>
+                <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="80%" color=#987cb9 SIZE=3>
+                <p class="lead">{{ word }}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

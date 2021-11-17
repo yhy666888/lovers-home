@@ -1,0 +1,127 @@
+{% extends 'home/base.html' %} {% block content %}
+<!--新增待办-->
+<br>
+<form method="post">
+    <input type="text" name="body" autocomplete="off" required placeholder="你要做些什么？" class="todo-add">
+
+    <button class="todo-add-btn" type="submit">保存</button>
+</form>
+<div class="row" id="dashboard" style="display: block;">
+    <ul role="tablist" class="row-ul">
+        <li>
+            <a href="#all" role="tab" data-toggle="tab">
+                    全部 <span>{{ todos|length }}</span>
+                </a>
+        </li>
+        <li>
+            <a href="#false" role="tab" data-toggle="tab">
+                    未完成 <span>{{ todo_false|length }}</span>
+                </a>
+        </li>
+        <li>
+            <a href="#true" role="tab" data-toggle="tab">
+                    已完成 <span>{{ todo_true|length }}</span>
+                </a>
+        </li>
+    </ul>
+</div>
+<div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="all">
+        <ul class="todo-list">
+            {% for todo in todos %}
+            <li>
+                <!--选框-->
+                {% if todo.done == true %}
+                <div class="true">
+                    <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                        <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()" checked>{% else %}
+                        <div class="false">
+                            <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()"> {% endif %}
+
+                                <input type="hidden" name="todo_1" value="0">
+                            </form>
+                            <p>{{ todo.body }}</p>
+                            <span class="float-right">
+            <a href="{{ url_for('home.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+            <form action="{{ url_for('home.delete', todo_id=todo.id) }}" method="post" class="inline-form">
+            <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
+            </form>
+        </span></div>
+            </li>
+            {% endfor %}
+        </ul>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="false">
+            <div role="tabpanel" class="tab-pane active" id="home">
+                <ul class="todo-list">
+                    {% for todo in todo_false %}
+                    <li>
+                        <!--选框-->
+                        {% if todo.done == true %}
+                        <div class="true">
+                            <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()" checked>{% else %}
+                                <div class="false">
+                                    <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                        <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()"> {% endif %}
+
+                                        <input type="hidden" name="todo_1" value="0">
+                                    </form>
+                                    <p>{{ todo.body }}</p>
+                                    <span class="float-right">
+                <a href="{{ url_for('home.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+                <form action="{{ url_for('home.delete', todo_id=todo.id) }}" method="post" class="inline-form">
+                <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
+                </form>
+            </span></div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="true">
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <ul class="todo-list">
+                        {% for todo in todo_true %}
+                        <li>
+                            <!--选框-->
+                            {% if todo.done == true %}
+                            <div class="true">
+                                <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                    <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()" checked>{% else %}
+                                    <div class="false">
+                                        <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                            <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()"> {% endif %}
+
+                                            <input type="hidden" name="todo_1" value="0">
+                                        </form>
+                                        <p>{{ todo.body }}</p>
+                                        <span class="float-right">
+                <a href="{{ url_for('home.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+                <form action="{{ url_for('home.delete', todo_id=todo.id) }}" method="post" class="inline-form">
+                <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
+                </form>
+            </span></div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    </div>
+                </div>
+                <style>
+                    .bd {
+                        border-bottom: #060 2px solid;
+                        padding-bottom: 8px;
+                    }
+                </style>
+                <script>
+                    $(function() {
+                        var cotrs = $(".row-ul li a");
+                        cotrs.click(function(e) {
+                            e.preventDefault();
+                            $(this).closest("li").addClass("bd").siblings().removeClass("bd");
+                        });
+                    });
+                </script>
+            </div>
+            <br> {% endblock %}
