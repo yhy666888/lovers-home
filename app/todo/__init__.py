@@ -1,4 +1,4 @@
 from flask import Blueprint
 
-home = Blueprint("home", __name__)  # 定义蓝图
-import app.home.views
+todo = Blueprint("todo", __name__)  # 定义蓝图
+import app.todo.views

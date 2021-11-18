@@ -1,4 +1,4 @@
-{% extends 'home/base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <!--新增待办-->
 <br>
 <form method="post">
@@ -33,18 +33,18 @@
                 <!--选框-->
                 {% if todo.done == true %}
                 <div class="true">
-                    <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                    <form method="post" class="inline-form" action="{{ url_for('todo.check', todo_id=todo.id) }}">
                         <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()" checked>{% else %}
                         <div class="false">
-                            <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                            <form method="post" class="inline-form" action="{{ url_for('todo.check', todo_id=todo.id) }}">
                                 <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()"> {% endif %}
 
                                 <input type="hidden" name="todo_1" value="0">
                             </form>
                             <p>{{ todo.body }}</p>
                             <span class="float-right">
-            <a href="{{ url_for('home.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
-            <form action="{{ url_for('home.delete', todo_id=todo.id) }}" method="post" class="inline-form">
+            <a href="{{ url_for('todo.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+            <form action="{{ url_for('todo.delete', todo_id=todo.id) }}" method="post" class="inline-form">
             <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
             </form>
         </span></div>
@@ -60,18 +60,18 @@
                         <!--选框-->
                         {% if todo.done == true %}
                         <div class="true">
-                            <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                            <form method="post" class="inline-form" action="{{ url_for('todo.check', todo_id=todo.id) }}">
                                 <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()" checked>{% else %}
                                 <div class="false">
-                                    <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                    <form method="post" class="inline-form" action="{{ url_for('todo.check', todo_id=todo.id) }}">
                                         <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()"> {% endif %}
 
                                         <input type="hidden" name="todo_1" value="0">
                                     </form>
                                     <p>{{ todo.body }}</p>
                                     <span class="float-right">
-                <a href="{{ url_for('home.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
-                <form action="{{ url_for('home.delete', todo_id=todo.id) }}" method="post" class="inline-form">
+                <a href="{{ url_for('todo.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+                <form action="{{ url_for('todo.delete', todo_id=todo.id) }}" method="post" class="inline-form">
                 <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
                 </form>
             </span></div>
@@ -88,18 +88,18 @@
                             <!--选框-->
                             {% if todo.done == true %}
                             <div class="true">
-                                <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                <form method="post" class="inline-form" action="{{ url_for('todo.check', todo_id=todo.id) }}">
                                     <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()" checked>{% else %}
                                     <div class="false">
-                                        <form method="post" class="inline-form" action="{{ url_for('home.check', todo_id=todo.id) }}">
+                                        <form method="post" class="inline-form" action="{{ url_for('todo.check', todo_id=todo.id) }}">
                                             <input class="material-icons" type="checkbox" name="todo_1" onclick="this.form.submit()"> {% endif %}
 
                                             <input type="hidden" name="todo_1" value="0">
                                         </form>
                                         <p>{{ todo.body }}</p>
                                         <span class="float-right">
-                <a href="{{ url_for('home.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
-                <form action="{{ url_for('home.delete', todo_id=todo.id) }}" method="post" class="inline-form">
+                <a href="{{ url_for('todo.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+                <form action="{{ url_for('todo.delete', todo_id=todo.id) }}" method="post" class="inline-form">
                 <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
                 </form>
             </span></div>

@@ -29,10 +29,12 @@
   <ul>
     <li><a href={{ url_for('todo.index') }}>首页</a></li>
     <li><a href={{ url_for('todo.todo_index') }}>待办</a></li>
-    <li><a>留言</a></li>
+    <li><a href={{ url_for('message.index') }}>留言</a></li>
     <li><a></a></li>
   </ul>
 </nav>
 {% block content %}{% endblock %}
+{{ moment.include_moment(local_js=url_for('static', filename='js/moment-with-locales.min.js')) }}
+{{ moment.lang('zh-cn') }}
 </body>
 </html>

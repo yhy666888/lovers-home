@@ -47,7 +47,8 @@ class ToDo(db.Model):
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, default=datetime.datetime.now, index=True)
+    name = db.Column(db.String(20))
+    timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow, index=True)
     author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     author = db.relationship('User', back_populates='messages')
 

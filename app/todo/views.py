@@ -12,14 +12,15 @@ from werkzeug.utils import redirect
 from wtforms import BooleanField, SubmitField
 from wtforms.validators import DataRequired
 
-from . import home  # 调用蓝图
-
-@home.route("/test", methods=['GET'])
-def test():
-    return render_template('home/test.html')
+from . import todo  # 调用蓝图
 
 
-@home.route("/", methods=['GET', 'POST'])
+# @todo.route("/test", methods=['GET'])
+# def test():
+#     return render_template('todo/test.html')
+
+
+@todo.route("/", methods=['GET', 'POST'])
 def index():
     # 一句话
     url = 'https://api.mcloc.cn/love'
@@ -28,32 +29,32 @@ def index():
     # 时间计算
     starttime = datetime.datetime(2020, 10, 7, 17, 00, 00)
     now = datetime.datetime.now()
-    interval = str((now-starttime).days)
+    interval = str((now - starttime).days)
 
-    return render_template('home/index.html', word=love_word.text, interval=interval)
+    return render_template('index.html', word=love_word.text, interval=interval)
 
 
-@home.route("/todo", methods=['GET', 'POST'])
-def todo():
+@todo.route("/todo", methods=['GET', 'POST'])
+def todo_index():
     if request.method == 'POST':
         body = request.form.get('body')
         if not body or len(body) > 50:
             flash('无效输入')
-            return redirect(url_for('home.todo'))
-        todo = ToDo(body=body)
-        db.session.add(todo)
+            return redirect(url_for('todo.todo_index'))
+        todo_add = ToDo(body=body)
+        db.session.add(todo_add)
         db.session.commit()
         flash('保存成功')
-        return redirect(url_for('home.todo'))
+        return redirect(url_for('todo.todo_index'))
 
     todos = ToDo.query.all()  # 查询表中所有事项
     todo_true = ToDo.query.filter_by(done=True).all()
     todo_false = ToDo.query.filter_by(done=False).all()
-    return render_template('home/todo.html', todos=todos, todo_true=todo_true, todo_false=todo_false)
+    return render_template('todo/todo.html', todos=todos, todo_true=todo_true, todo_false=todo_false)
 
 
 # 勾选选框事件
-@home.route("/todo/check/<int:todo_id>", methods=["GET", "POST"])
+@todo.route("/todo/check/<int:todo_id>", methods=["GET", "POST"])
 def check(todo_id):
     todo_check = ToDo.query.get_or_404(todo_id)
 
@@ -66,11 +67,11 @@ def check(todo_id):
 
     db.session.commit()
     flash('更新成功')
-    return redirect(url_for('home.todo'))
+    return redirect(url_for('todo.todo_index'))
 
 
 # 编辑
-@home.route("/todo/edit/<int:todo_id>", methods=["GET", "POST"])
+@todo.route("/todo/edit/<int:todo_id>", methods=["GET", "POST"])
 def edit(todo_id):
     todo = ToDo.query.get_or_404(todo_id)
 
@@ -79,19 +80,19 @@ def edit(todo_id):
 
         if not body or len(body) > 50:
             flash('无效输入')
-            return redirect(url_for('home.edit', todo_id=todo_id))
+            return redirect(url_for('todo.edit', todo_id=todo_id))
         todo.body = body
         db.session.commit()
         flash('更新成功')
-        return redirect(url_for('home.todo'))
-    return render_template('home/edit.html', todo=todo)
+        return redirect(url_for('todo.todo_index'))
+    return render_template('todo/edit.html', todo=todo)
 
 
 # 删除
-@home.route("/todo/delete/<int:todo_id>", methods=["POST"])
+@todo.route("/todo/delete/<int:todo_id>", methods=["POST"])
 def delete(todo_id):
     todo = ToDo.query.get_or_404(todo_id)
     db.session.delete(todo)
     db.session.commit()
     flash('删除成功')
-    return redirect(url_for('home.todo'))
+    return redirect(url_for('todo.todo_index'))
