@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="message-form">
+  <form method="POST" action="{{ url_for('jiujia.jiujia_index') }}">
+    date: <input type="text" name="date">
+    <input type="submit" name="submit">
+  </form>
+</div>
+<div class="list-group">
+  {% for date in text %}
+  <p>{{ date }}</p>
+  {% endfor %}
+  <!--
+  {% for enable in text.values %}
+  <p>{{ enable }}</p>
+  {% endfor %}-->
+</div>
+{% endblock %}

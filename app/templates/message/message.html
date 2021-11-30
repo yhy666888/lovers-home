@@ -22,7 +22,12 @@
             </small>
         </div>
         <p class="mb-1">{{ message.body }}</p>
+            <object><a href="{{ url_for('message.edit', edit_id=message.id) }}" type="button" class="btn" style="padding: 4.5px 5px">编辑</a></object>
+        <form action="{{ url_for('message.delete', delete_id=message.id) }}" method="post" class="inline-form">
+            <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
+        </form>
     </a>
+
     {% endfor %}
 </div>
 {% endblock %}

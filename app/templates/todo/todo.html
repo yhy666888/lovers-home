@@ -43,7 +43,7 @@
                             </form>
                             <p>{{ todo.body }}</p>
                             <span class="float-right">
-            <a href="{{ url_for('todo.edit', todo_id=todo.id) }}" class="btn" name="edit">编辑</a>
+            <a href="{{ url_for('todo.edit', todo_id=todo.id) }}" class="btn" name="edit" style="padding: 4.5px 5px">编辑</a>
             <form action="{{ url_for('todo.delete', todo_id=todo.id) }}" method="post" class="inline-form">
             <input type="submit" class="btn" name="delete" value="删除" onclick="return confirm('确认删除')">
             </form>

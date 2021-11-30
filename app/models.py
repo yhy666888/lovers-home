@@ -18,6 +18,11 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User %r>" % self.name
+          
+    def check_pwd(self, pwd):
+        """验证密码是否正确，直接将hash密码和输入的密码进行比较，如果相同则返回True"""
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.pwd, pwd)
 
 
 # 用户日志
@@ -54,13 +59,13 @@ class Message(db.Model):
 
 
 # if __name__ == '__main__':
-    # db.create_all()  # 创建数据表
-    # 添加用户
-    # from werkzeug.security import generate_password_hash
-    # user = User(
-    #     name='test',
-    #     pwd=generate_password_hash('password'),
-    #     sex='男'
-    # )
-    # db.session.add(user)
-    # db.session.commit()
+#     # db.create_all()  # 创建数据表
+#     # 添加用户
+#     from werkzeug.security import generate_password_hash
+#     user = User(
+#         name='test',
+#         pwd=generate_password_hash('password'),
+#         sex='男'
+#     )
+#     db.session.add(user)
+#     db.session.commit()

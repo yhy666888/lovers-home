@@ -1,10 +1,10 @@
 """视图处理文件"""
 import datetime
 from re import match
-
 import requests
 from app import db
 from app.models import ToDo
+from app.user.views import user_login_require
 from flask import flash, render_template, request
 from flask.helpers import url_for
 from flask_wtf import FlaskForm
@@ -21,6 +21,7 @@ from . import todo  # 调用蓝图
 
 
 @todo.route("/", methods=['GET', 'POST'])
+@user_login_require
 def index():
     # 一句话
     url = 'https://api.mcloc.cn/love'
@@ -35,6 +36,7 @@ def index():
 
 
 @todo.route("/todo", methods=['GET', 'POST'])
+@user_login_require
 def todo_index():
     if request.method == 'POST':
         body = request.form.get('body')
@@ -55,6 +57,7 @@ def todo_index():
 
 # 勾选选框事件
 @todo.route("/todo/check/<int:todo_id>", methods=["GET", "POST"])
+@user_login_require
 def check(todo_id):
     todo_check = ToDo.query.get_or_404(todo_id)
 
@@ -72,6 +75,7 @@ def check(todo_id):
 
 # 编辑
 @todo.route("/todo/edit/<int:todo_id>", methods=["GET", "POST"])
+@user_login_require
 def edit(todo_id):
     todo = ToDo.query.get_or_404(todo_id)
 
@@ -90,6 +94,7 @@ def edit(todo_id):
 
 # 删除
 @todo.route("/todo/delete/<int:todo_id>", methods=["POST"])
+@user_login_require
 def delete(todo_id):
     todo = ToDo.query.get_or_404(todo_id)
     db.session.delete(todo)

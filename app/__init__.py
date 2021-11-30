@@ -21,9 +21,13 @@ toolbar = DebugToolbarExtension(app)
 
 from app.todo import todo as home_blueprint  # 导入
 from app.message import message as message_blueprint
+from app.user import user as user_blueprint
+from app.jiujia import jiujia as jiujia_blueprint
 
 app.register_blueprint(home_blueprint)  # 注册蓝图
 app.register_blueprint(message_blueprint)
+app.register_blueprint(user_blueprint)
+app.register_blueprint(jiujia_blueprint)
 
 
 @app.errorhandler(404)
